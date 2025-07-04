@@ -1,0 +1,4 @@
+auth-service/go.mod
+user-service/go.mod
+
+app.env

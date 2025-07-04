@@ -1,0 +1,10 @@
+/*
+Custom Css
+*/
+
+.footer-icons {
+  display: flex;
+  justify-content: space-between; /* spaces items evenly */
+  padding: 0;
+  margin: 0;
+}

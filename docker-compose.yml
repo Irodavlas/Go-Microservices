@@ -1,0 +1,35 @@
+
+
+services:
+  # MongoDB database for users data 
+  users-db:
+    image: mongo:latest
+    container_name: users-mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - users-data:/data/db
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    container_name: api-gateway 
+    env_file:
+      - app.env
+    ports:
+      - "8000:8000" 
+  users-service:
+    build:
+      context: .
+      dockerfile: user-service/Dockerfile
+    container_name: users-service
+    ports:
+      - "5000:5000"
+    depends_on:
+      - users-db
+    environment:
+      MONGO_URI: mongodb://users-db:27017 #mongodb://172.17.0.1:27018
+
+    
+volumes:
+  users-data:
